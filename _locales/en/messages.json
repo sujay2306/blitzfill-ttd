@@ -1,0 +1,11 @@
+{
+  "appName": {
+    "message": "BlitzFill for TTD"
+  },
+  "appDesc": {
+    "message": "Fill saved pilgrim details into TTD booking forms in one click. Unofficial, not affiliated with TTD. Data stays on your device."
+  },
+  "cmdFill": {
+    "message": "Fill this page with saved pilgrims"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "blitzfill-ttd",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BlitzFill for TTD: the fastest autofill for TTD booking forms (Chrome extension, MV3).",
+  "license": "MIT",
+  "author": "Sujay KS <sujayks007@gmail.com>",
+  "repository": "github:sujay2306/blitzfill-ttd",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:unit": "node --test tests/core.test.js tests/manifest.test.js",
+    "test:e2e": "node --test tests/e2e.test.js",
+    "package": "bash scripts/package.sh",
+    "screenshots": "node scripts/screenshots.js"
+  },
+  "devDependencies": {
+    "puppeteer-core": "25.16.0"
+  }
+}

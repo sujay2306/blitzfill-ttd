@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Srivani fixture</title>
+<style>
+  body { font: 14px system-ui, sans-serif; margin: 20px; }
+  .ng-hide { display: none !important; }
+  .member { display: flex; gap: 6px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<form id="srivani" name="donorForm"></form>
+<script>
+/* AngularJS-style imitation: plain DOM events update a model, native
+ * <select> option lists load asynchronously, rows beyond the member count
+ * are hidden with .ng-hide, proofId enables after a proof type is chosen. */
+(function () {
+  'use strict';
+  const MEMBERS = 4;
+  const model = [];
+  const form = document.getElementById('srivani');
+  const mk = (tag, attrs, parent) => {
+    const n = document.createElement(tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    parent.appendChild(n);
+    return n;
+  };
+  for (let i = 0; i < 9; i++) {
+    const m = { fName: '', age: '', gender: '', proofS: '', proofId: '' };
+    model.push(m);
+    const row = mk('div', { class: 'member' + (i >= MEMBERS ? ' ng-hide' : '') }, form);
+    const name = mk('input', { name: 'fName' + i, 'ng-model': 'm.fName' }, row);
+    const age = mk('input', { name: 'age' + i }, row);
+    const gender = mk('select', { name: 'gender' + i }, row);
+    ['Select', 'Male', 'Female', 'Transgender'].forEach((t, k) => {
+      const o = mk('option', { value: k ? 'string:' + t[0] : '' }, gender); o.textContent = t;
+    });
+    const proof = mk('select', { name: 'proofS' + i }, row);
+    mk('option', { value: '?' }, proof).textContent = '';
+    const proofId = mk('input', { name: 'proofId' + i, disabled: '' }, row);
+    setTimeout(() => { // options arrive after a simulated $http call
+      ['AADHAAR CARD', 'PASSPORT'].forEach((t) => { mk('option', { value: 'string:' + t }, proof).textContent = t; });
+    }, 60 + i * 5);
+    const bind = (el, key) => ['input', 'change'].forEach((ev) => el.addEventListener(ev, () => {
+      m[key] = el.tagName === 'SELECT' ? (el.selectedIndex > 0 ? el.options[el.selectedIndex].text : '') : el.value;
+      if (key === 'proofS') proofId.disabled = !m.proofS;
+    }));
+    // like the real validator: age is checked against the passport once one is chosen
+    age.addEventListener('blur', () => { if (m.proofS === 'PASSPORT') m.ageError = 'age vs passport'; });
+    bind(name, 'fName'); bind(age, 'age'); bind(gender, 'gender'); bind(proof, 'proofS'); bind(proofId, 'proofId');
+  }
+  window.srivani = { model };
+})();
+</script>
+</body>
+</html>

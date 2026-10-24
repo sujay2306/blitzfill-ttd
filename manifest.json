@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_appName__",
+  "short_name": "BlitzFill",
+  "version": "1.0.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "minimum_chrome_version": "111",
+  "author": "Sujay KS",
+  "homepage_url": "https://github.com/sujay2306/blitzfill-ttd",
+  "icons": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png", "128": "icons/icon-128.png" },
+  "action": {
+    "default_title": "__MSG_appName__",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png" }
+  },
+  "background": { "service_worker": "src/background.js" },
+  "permissions": ["storage", "scripting"],
+  "host_permissions": ["https://ttdevasthanams.ap.gov.in/*", "https://tirupatibalaji.ap.gov.in/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://ttdevasthanams.ap.gov.in/*", "https://tirupatibalaji.ap.gov.in/*"],
+      "js": ["src/lib/core.js", "src/content/engine.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://ttdevasthanams.ap.gov.in/*", "https://tirupatibalaji.ap.gov.in/*"],
+      "js": ["src/lib/core.js", "src/lib/i18n.js", "src/content/bridge.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "fill": { "suggested_key": { "default": "Alt+Shift+F" }, "description": "__MSG_cmdFill__" }
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+  }
+}

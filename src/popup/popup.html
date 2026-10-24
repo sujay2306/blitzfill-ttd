@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>BlitzFill</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img class="mark" src="../../icons/icon-48.png" width="22" height="22" alt="">
+      <div class="brand-text">
+        <span class="brand-name">BlitzFill</span>
+        <span class="tagline" data-i18n="tagline"></span>
+      </div>
+    </div>
+    <span id="status" class="pill" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="status-text"></span></span>
+  </header>
+
+  <section class="hero" aria-label="Fill">
+    <button id="fill" type="button" class="btn-fill">
+      <span class="fill-label" data-i18n="fillPage"></span>
+      <span class="fill-meta"><span id="fill-count"></span><kbd id="shortcut"></kbd></span>
+    </button>
+    <div class="result-row">
+      <p id="result" class="result" role="status" aria-live="polite"></p>
+      <button id="undo" type="button" class="btn-plain" data-i18n="undo"></button>
+    </div>
+  </section>
+
+  <div class="seg tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" id="tab-pilgrims" data-tab="pilgrims" aria-controls="panel-pilgrims" data-i18n="tabPilgrims"></button>
+    <button type="button" role="tab" id="tab-contact" data-tab="contact" aria-controls="panel-contact" data-i18n="tabContact"></button>
+    <button type="button" role="tab" id="tab-settings" data-tab="settings" aria-controls="panel-settings" data-i18n="tabSettings"></button>
+  </div>
+
+  <main>
+    <!-- Pilgrims -->
+    <section id="panel-pilgrims" class="panel" role="tabpanel" aria-labelledby="tab-pilgrims">
+      <ul id="pilgrim-list" class="group plist" aria-label="Saved pilgrims"></ul>
+      <p id="pilgrim-empty" class="empty" data-i18n="emptyPilgrims" hidden></p>
+      <div id="pilgrim-editor"></div>
+      <div id="pilgrim-actions" class="btn-pair">
+        <button id="add-pilgrim" type="button" class="btn-tinted" data-i18n="addPilgrim"></button>
+        <button id="paste-list" type="button" class="btn-tinted" data-i18n="pasteList"></button>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="panel-contact" class="panel" role="tabpanel" aria-labelledby="tab-contact" hidden>
+      <form id="contact-form" class="group" novalidate autocomplete="off">
+        <div class="row field-row">
+          <label for="c-email" data-i18n="email"></label>
+          <div class="ctl"><input id="c-email" name="email" type="email" inputmode="email" spellcheck="false" placeholder="name@example.com" aria-describedby="c-email-err"><span class="err" id="c-email-err"></span></div>
+        </div>
+        <div class="row field-row">
+          <label for="c-mobile" data-i18n="mobile"></label>
+          <div class="ctl"><input id="c-mobile" name="mobile" type="tel" inputmode="numeric" maxlength="16" placeholder="98765 43210" aria-describedby="c-mobile-err"><span class="err" id="c-mobile-err"></span></div>
+        </div>
+        <div class="row field-row">
+          <label for="c-country" data-i18n="country"></label>
+          <div class="ctl"><input id="c-country" name="country" list="dl-countries"></div>
+        </div>
+        <div class="row field-row">
+          <label for="c-state" data-i18n="state"></label>
+          <div class="ctl"><input id="c-state" name="state" list="dl-states"></div>
+        </div>
+        <div class="row field-row">
+          <label for="c-city" data-i18n="city"></label>
+          <div class="ctl"><input id="c-city" name="city"></div>
+        </div>
+        <div class="row field-row">
+          <label for="c-pincode" data-i18n="pincode"></label>
+          <div class="ctl"><input id="c-pincode" name="pincode" inputmode="numeric" maxlength="6" placeholder="517501" aria-describedby="c-pincode-err"><span class="err" id="c-pincode-err"></span></div>
+        </div>
+        <div class="row field-row">
+          <label for="c-gothram" data-i18n="gothram"></label>
+          <div class="ctl"><input id="c-gothram" name="gothram"></div>
+        </div>
+      </form>
+      <p class="footnote"><span data-i18n="contactNote"></span> <span id="saved-flash" class="saved" aria-live="polite"></span></p>
+      <datalist id="dl-countries"></datalist>
+      <datalist id="dl-states"></datalist>
+    </section>
+
+    <!-- Settings -->
+    <section id="panel-settings" class="panel" role="tabpanel" aria-labelledby="tab-settings" hidden>
+      <div class="group">
+        <label class="row switch-row">
+          <span class="sw-text"><span class="sw-label" data-i18n="setFab"></span><span class="sw-sub" data-i18n="setFabSub"></span></span>
+          <input type="checkbox" role="switch" class="switch" data-setting="fab">
+        </label>
+        <label class="row switch-row">
+          <span class="sw-text"><span class="sw-label" data-i18n="setAuto"></span><span class="sw-sub" data-i18n="setAutoSub"></span></span>
+          <input type="checkbox" role="switch" class="switch" data-setting="autofill">
+        </label>
+        <label class="row switch-row">
+          <span class="sw-text"><span class="sw-label" data-i18n="setOverwrite"></span><span class="sw-sub" data-i18n="setOverwriteSub"></span></span>
+          <input type="checkbox" role="switch" class="switch" data-setting="overwrite">
+        </label>
+      </div>
+
+      <h2 class="group-title" data-i18n="backup"></h2>
+      <div class="group">
+        <div class="row"><button id="export" type="button" class="row-btn" data-i18n="exportData"></button></div>
+        <div class="row"><button id="import" type="button" class="row-btn" data-i18n="importData"></button></div>
+        <div class="row" id="clear-row"><button id="clear" type="button" class="row-btn danger" data-i18n="clearAll"></button></div>
+        <div class="row confirm-row" id="clear-confirm" hidden>
+          <span class="confirm-text" data-i18n="confirmClear"></span>
+          <span class="confirm-btns">
+            <button id="clear-cancel" type="button" class="btn-plain" data-i18n="cancel"></button>
+            <button id="clear-yes" type="button" class="btn-destructive" data-i18n="eraseAll"></button>
+          </span>
+        </div>
+        <input id="import-file" type="file" accept="application/json,.json" hidden>
+      </div>
+      <p id="settings-msg" class="result" role="status" aria-live="polite"></p>
+
+      <h2 class="group-title" data-i18n="privacyTitle"></h2>
+      <div class="group about">
+        <p data-i18n="privacy"></p>
+        <p class="secondary" data-i18n="disclaimer"></p>
+        <p class="secondary"><span data-i18n="version"></span> <span id="version"></span> · <a id="repo" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../lib/core.js"></script>
+  <script src="../lib/i18n.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
