@@ -2,7 +2,7 @@
 
 A small autofill for TTD booking forms. Built out of curiosity.
 
-Save pilgrim and contact details once, then fill the form with one click or `Alt+Shift+F`. Data stays in your browser. It doesn't touch CAPTCHA, OTP or payment.
+Save pilgrim and contact details once, then fill the form with one click or `Alt+Shift+F` (Mac: `Option+Shift+F`). Data stays in your browser. It doesn't touch CAPTCHA, OTP or payment.
 
 ## Install
 
@@ -12,7 +12,7 @@ Save pilgrim and contact details once, then fill the form with one click or `Alt
 
 ## Use
 
-Add pilgrims in the popup (or **Paste List**: `Name, Age, M/F/T, Aadhaar`), open a TTD booking form, press `Alt+Shift+F`.
+Add pilgrims in the popup (or **Paste List**: `Name, Age, M/F/T, Aadhaar`), open a TTD booking form, press `Alt+Shift+F` (Mac: `Option+Shift+F`).
 
 Issues welcome.
 
