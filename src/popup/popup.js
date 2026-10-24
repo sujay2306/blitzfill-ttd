@@ -352,6 +352,17 @@
 
   /* -------------------------------------------------------- messaging */
 
+  // Same steps as the service worker, done here so a stale worker can't block it.
+  async function inject(tabId) {
+    const token = chrome.runtime.getManifest().version + ':' + Date.now();
+    await chrome.scripting.executeScript({
+      target: { tabId }, world: 'MAIN', args: [token],
+      func: (v) => { window.__blitzfillToken = v; }
+    });
+    await chrome.scripting.executeScript({ target: { tabId }, files: ['src/lib/core.js', 'src/content/engine.js'], world: 'MAIN' });
+    await chrome.scripting.executeScript({ target: { tabId }, files: ['src/lib/core.js', 'src/lib/i18n.js', 'src/content/bridge.js'] });
+  }
+
   function send(msg) {
     const tab = S.tab;
     if (!tab || tab.id == null) return Promise.resolve({ ok: false, error: 'notTTD', dead: true });
@@ -361,9 +372,10 @@
     // instead of asking for a reload, which would cost the user their queue spot.
     return once().catch(() => {
       if (!C.isTTDUrl(tab.url)) return dead();
-      return chrome.runtime.sendMessage({ type: 'inject', tabId: tab.id })
-        .then((r) => (r && r.ok ? once() : Promise.reject()))
-        .catch(dead);
+      return inject(tab.id).then(once).catch((e) => {
+        S.injectError = String((e && e.message) || e || '');
+        return dead();
+      });
     });
   }
 
@@ -385,6 +397,7 @@
     send({ type }).then((r) => {
       S.busy = false;
       S.result = I.summarize(LANG, r);
+      if (r.dead && S.injectError) S.result.detail = S.injectError;
       if (r.dead) S.status = r.error === 'noTab' ? 'reload' : 'off';
       renderStatus();
       if (!r.dead) probe();
