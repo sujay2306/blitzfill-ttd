@@ -1,34 +1,19 @@
 # BlitzFill for TTD
 
-Fill TTD booking forms in one click.
+A small autofill for TTD booking forms. Built out of curiosity.
 
-The TTD site makes you retype every pilgrim's name, age and Aadhaar on every booking attempt. So I built this. Save your details once, press `Alt+Shift+F`, done.
+Save pilgrim and contact details once, then fill the form with one click or `Alt+Shift+F`. Data stays in your browser. It doesn't touch CAPTCHA, OTP or payment.
 
-- Fills darshan, seva, accommodation and Srivani forms, plus general details (email, state, city, PIN)
-- **Paste List**: add everyone at once from a spreadsheet (`Name, Age, M/F/T, Aadhaar`)
-- Free, no account, no tracking. Your data never leaves your browser
-- Never touches CAPTCHA, OTP or payment, and never submits for you
-
-## Install (free)
+## Install
 
 1. Download the zip from [Releases](https://github.com/sujay2306/blitzfill-ttd/releases/latest) and unzip it
-2. Open `chrome://extensions` and turn on **Developer mode** (top right)
-3. Click **Load unpacked** and pick the unzipped folder
+2. Open `chrome://extensions`, turn on **Developer mode**
+3. Click **Load unpacked** and pick the folder
 
 ## Use
 
-1. Click the BlitzFill icon, add your pilgrims and fill in the **Contact** tab
-2. Open a TTD booking form
-3. Press `Alt+Shift+F`, click ⚡ on the page, or click **Fill This Page**
-4. Check the form, solve the CAPTCHA, continue
+Add pilgrims in the popup (or **Paste List**: `Name, Age, M/F/T, Aadhaar`), open a TTD booking form, press `Alt+Shift+F`.
 
-Something didn't fill? [Open an issue](https://github.com/sujay2306/blitzfill-ttd/issues) with the form and field name.
-
-## Dev
-
-```
-npm install && npm test
-bash scripts/package.sh
-```
+Issues welcome.
 
 MIT · Not affiliated with TTD · [Privacy](PRIVACY.md)

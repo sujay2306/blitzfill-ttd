@@ -35,48 +35,17 @@ English
 Plain text, no markdown. Paste between the lines.
 
 ```
-Unofficial tool. Not affiliated with or endorsed by Tirumala Tirupati Devasthanams (TTD).
+Unofficial. Not affiliated with or endorsed by Tirumala Tirupati Devasthanams (TTD).
 
-BlitzFill fills your saved pilgrim details into booking forms on the official TTD websites in one click.
+A small autofill for TTD booking forms. Save pilgrim and contact details once, then fill the form with one click or Alt+Shift+F.
 
-Why I built it
-The booking site asks for every pilgrim's name, age, gender and ID number on every booking attempt. Booking for my family meant typing the same details for four or five people again each time, while slots were filling up. BlitzFill stores those details once, in your browser, and types them into the form for you. You still solve the CAPTCHA, check the form and press Continue yourself.
+• Fills pilgrim rows (name, age, gender, ID type, ID number) and general details (email, state, city, PIN code).
+• Add pilgrims one by one, or paste a list: Name, Age, M/F/T, Aadhaar.
+• Only fills empty fields. Undo is available.
+• Data stays in your browser. No servers, no accounts, no tracking.
+• Does not solve CAPTCHA or OTP, does not submit forms, does not touch payment.
 
-What it fills
-• Pilgrim rows on Darshan, Seva and Accommodation booking forms: name, age, gender, photo-ID type and ID number.
-• The Srivani Trust donor form.
-• Contact details: email, mobile, country, state, city, PIN code and gothram.
-• Passport holders: when the passport/visa popup opens, BlitzFill fills the passport number and country, does not submit the popup, and reminds you to review it.
-• Other forms on these sites: a fallback reads field names and labels and fills the fields it recognises.
-
-How you use it
-• Click the Fill button that appears on booking forms, click Fill This Page in the toolbar popup, or press Alt+Shift+F.
-• Filled fields flash green. Anything it couldn't fill, and required fields still empty, are outlined in red.
-• Changed your mind? Undo restores every field the last fill changed.
-• By default only empty fields are filled, so nothing you typed is overwritten.
-• Optional auto-fill (off by default) fills the form as soon as it appears.
-• Use Add Pilgrim for one person, or Paste List to add several at once (one per line: Name, Age, M/F/T, Aadhaar).
-• Aadhaar numbers are checked with the official checksum, and ages, mobiles, PIN codes and emails are validated when you save.
-• Follows your system's light or dark appearance. Export and import your list as a JSON backup.
-
-Why it's fast
-The booking site is a React app. Instead of setting values and sleeping for a fixed time, BlitzFill calls each field's own change and blur handlers and waits only until the page has actually updated that field. Fields that already hold the right value are skipped, dropdowns are filled the moment their options appear, and a final check re-fills anything the page reset. The result toast shows how long the fill took.
-
-Private by design
-• Your details are stored only in your browser (chrome.storage.local).
-• No network requests, no servers, no accounts, no analytics, no tracking.
-• Runs only on ttdevasthanams.ap.gov.in and tirupatibalaji.ap.gov.in.
-• Delete everything any time from Settings → Clear All Data, or by uninstalling.
-
-What it does not do
-• It does not solve or bypass CAPTCHAs or OTPs.
-• It does not submit forms or click Continue, Book or Pay.
-• It does not automate payment.
-It types for you. You stay in control of the booking.
-
-Free and open source (MIT): https://github.com/sujay2306/blitzfill-ttd
-
-Independent project, not affiliated with or endorsed by Tirumala Tirupati Devasthanams (TTD).
+Open source (MIT): https://github.com/sujay2306/blitzfill-ttd
 ```
 
 ## Single purpose
