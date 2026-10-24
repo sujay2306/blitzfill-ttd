@@ -68,17 +68,31 @@ It types for you. Everything else is still up to you.
 
 ## Install
 
-**Chrome Web Store:** <!-- CWS_URL -->
+**Chrome Web Store:** coming soon <!-- CWS_URL -->
 
-**Load unpacked (for development or before the store listing is live):**
+### Try it free, no Web Store needed
 
-1. Download or clone this repo.
+Loading it yourself costs nothing and takes a minute.
+
+1. Download the latest zip from [Releases](https://github.com/sujay2306/blitzfill-ttd/releases/latest) and unzip it, or clone this repo.
 2. Open `chrome://extensions` and turn on **Developer mode** (top right).
-3. Click **Load unpacked** and pick the `blitzfill-ttd` folder (the one with `manifest.json`).
-4. Pin BlitzFill from the puzzle-piece menu, open it and use **Add Pilgrim** or **Paste List**.
-5. Open a TTD booking form and click the ⚡ Fill button, **Fill This Page** in the popup, or press `Alt+Shift+F`.
+3. Click **Load unpacked** and pick the folder that contains `manifest.json`.
+4. Pin BlitzFill from the puzzle-piece menu 🧩.
 
-Requires Chrome 111 or newer (or another Chromium browser of the same version).
+Requires Chrome 111 or newer (Edge, Brave and other Chromium browsers work too).
+
+### Test it on TTD without booking anything
+
+1. Open BlitzFill and add your pilgrims with **Add Pilgrim**, or paste them all at once with **Paste List** (one per line: `Name, Age, M/F/T, Aadhaar`).
+2. Fill in the **Contact** tab (email, state, city, PIN code).
+3. Log in at [ttdevasthanams.ap.gov.in](https://ttdevasthanams.ap.gov.in), pick any darshan, seva or accommodation, and choose a date and slot to reach the pilgrim details form.
+4. Click the ⚡ Fill button on the page, **Fill This Page** in the popup, or press `Alt+Shift+F`.
+5. Check the form. Green rings mean filled; red means the field needs a look.
+6. **Stop there.** Don't press Continue or Pay. Close the tab and nothing is booked or charged.
+
+If a field doesn't fill, please [open an issue](https://github.com/sujay2306/blitzfill-ttd/issues) with the form name and the field. TTD changes its pages from time to time.
+
+After updating the code, click ↻ on the BlitzFill card in `chrome://extensions` and refresh the TTD tab.
 
 ## Development
 
