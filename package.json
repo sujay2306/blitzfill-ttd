@@ -1,6 +1,6 @@
 {
   "name": "blitzfill-ttd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "BlitzFill for TTD: the fastest autofill for TTD booking forms (Chrome extension, MV3).",
   "license": "MIT",

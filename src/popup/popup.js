@@ -355,10 +355,16 @@
   function send(msg) {
     const tab = S.tab;
     if (!tab || tab.id == null) return Promise.resolve({ ok: false, error: 'notTTD', dead: true });
-    return chrome.tabs.sendMessage(tab.id, msg).then(
-      (r) => r || { ok: false, error: 'noEngine' },
-      () => ({ ok: false, error: C.isTTDUrl(tab.url) ? 'noTab' : 'notTTD', dead: true })
-    );
+    const dead = () => ({ ok: false, error: C.isTTDUrl(tab.url) ? 'noTab' : 'notTTD', dead: true });
+    const once = () => chrome.tabs.sendMessage(tab.id, msg).then((r) => r || { ok: false, error: 'noEngine' });
+    // A TTD tab opened before install has no content scripts. Inject them
+    // instead of asking for a reload, which would cost the user their queue spot.
+    return once().catch(() => {
+      if (!C.isTTDUrl(tab.url)) return dead();
+      return chrome.runtime.sendMessage({ type: 'inject', tabId: tab.id })
+        .then((r) => (r && r.ok ? once() : Promise.reject()))
+        .catch(dead);
+    });
   }
 
   function probe() {
